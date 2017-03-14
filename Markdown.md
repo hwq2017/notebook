@@ -63,3 +63,52 @@ __这是粗体标记__
 1. james madison
 1. john monroe
 1. james
+## 任务列表
+```md
+- [x] finish my changes
+- [ ] push my commit to github
+* [ ] open a pull request
+```
+效果：
+- [x] finish my changes
+- [ ] push my commit to github
+- [ ] open a pull request
+
+## 层次样式
+```sh
+1. Mske my changes
+   1. Fix bug
+   2. Improve formatting
+      * Make the headings bigger
+ 2. Push my commits to github
+ 3. Open a pull request
+    * Describe my changes
+    * Mention all the mebers of my team
+      * Ask for feedback
+```
+效果：
+1. Mske my changes
+   1. Fix bug
+   2. Improve formatting
+      * Make the headings bigger
+ 2. Push my commits to github
+ 3. Open a pull request
+    * Describe my changes
+    * Mention all the mebers of my team
+      * Ask for feedback
+# 链接
+```md
+[github](http://github.com)
+[百度网址](http://www.baidu.com)
+```
+效果：
+
+[github](http://github.com)
+
+[百度网址](http://www.baidu.com)
+# 图片
+```md
+![图片](图片的网址)
+```
+效果：
+![图片](http://octodex.github.com/images/yaktocat.png)
