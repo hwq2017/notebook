@@ -112,3 +112,29 @@ __这是粗体标记__
 ```
 效果：
 ![图片](http://octodex.github.com/images/yaktocat.png)
+
+
+# 代码快
+```c
+
+#include <stdio.h>
+int main(void)
+{
+  printf("hello world!\n");
+  return 0;
+}
+
+```
+
+效果：
+```c
+#include <stdio.h>
+int main(void)
+{
+  printf("hello world!\n");
+  return 0;
+}
+```
+
+# 支持Emoji表情
+* [Emoji表情](https://www.webpagefx.com/tools/emoji-cheat-sheet/)
