@@ -96,16 +96,21 @@ __这是粗体标记__
     * Describe my changes
     * Mention all the mebers of my team
       * Ask for feedback
-# 链接
+# 链接 或 参考文档
 ```md
 [github](http://github.com)
 [百度网址](http://www.baidu.com)
+[Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
 ```
 效果：
 
 [github](http://github.com)
 
 [百度网址](http://www.baidu.com)
+
+[Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
+
+
 # 图片
 ```md
 ![图片](图片的网址)
@@ -114,17 +119,17 @@ __这是粗体标记__
 ![图片](http://octodex.github.com/images/yaktocat.png)
 
 
-# 代码快
-```c
+# 代码块
 
+```c
 #include <stdio.h>
 int main(void)
 {
   printf("hello world!\n");
   return 0;
 }
-
 ```
+
 
 效果：
 ```c
@@ -138,3 +143,16 @@ int main(void)
 
 # 支持Emoji表情
 * [Emoji表情](https://www.webpagefx.com/tools/emoji-cheat-sheet/)
+# 表格
+```md
+标题 | 内容 | 备注
+----|------|----  // 加粗表头内容
+今天 | 很热 | 少穿
+昨天 | 下雨 | 打伞
+```
+效果：
+
+标题 | 内容 | 备注
+----|------|----
+今天 | 很热 | 少穿
+昨天 | 下雨 | 打伞
