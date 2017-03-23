@@ -5,36 +5,15 @@
 ```sh
 $ sudo apt-get install sqlite3
 ```
-# sqlite基本命令
-   1. 建数据库：
-   ```sh
-    sqlite3 test.db /*注意sqlite的版本*/
-    ```
-   2. 查看帮助：
-   ```sh
-    sqlite> .help
-    ```
-   3. 文件存放位置：
-   ```sh
-    sqlite> .database
-    ```
-   4. 退出：
-   ```sh
-    sqlite> .quit
-    ```
-   5. 查看表：
-   ```sh
-    sqlite> .tables
-    ```
-   6. 显示表的结构：
-   ```sh
-    sqlite> .schema
-    ```
+
     
     
 # SQLite数据类型
+
 SQLite 数据类型是一个用来指定任何对象的数据类型的属性。SQLite 中的每一列，每个变量和表达式都有相关的数据类型。
+
 ### SQLite存储类
+
 存储类型 |  描述
 --------|----------|
 NULL    | 空值
@@ -42,7 +21,9 @@ INTEGER | 值是一个带符号的整数
 REAL    | 值是一个浮点数   为8字节
 TEXT    | 值是一个文本字符串，使用数据库编码（UTF-8、UTF-16BE 或 UTF-16LE）存储。
 BLOB    |  	值是一个 blob 数据，完全根据它的输入存储
+
 ### Date与Time数据类型
+
 SQLite 没有一个单独的用于存储日期和/或时间的存储类，但 SQLite 能够把日期和时间存储为 TEXT、REAL 或 INTEGER 值。
 
 存储类  |  日期格式
@@ -54,6 +35,7 @@ INTEGER | 从 1970-01-01 00:00:00 UTC 算起的秒数。
 
 
 # 创建数据库
+
 sqlite3 的基本语法如下：
 ```sh
 $ sqlite3 test.db   (test.db为创建的数据库名)
@@ -68,6 +50,7 @@ sqlite>.databases
 sqlite>.quit
 ```
 # 创建表
+
 SQLite 的 CREATE TABLE 语句用于在任何给定的数据库创建一个新表。创建基本表，涉及到命名表、定义列及每一列的数据类型。
 
 语法:
