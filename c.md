@@ -1,9 +1,9 @@
 
 # 格式化的输入/输出
-### printf函数
+## printf函数
 * printf()函数是格式化输出函数, 一般用于向标准输出设备按规定格式输出信息。
 * printf()函数的调用格式为: 
-```md
+```c
     printf("<格式控制字符串>", <参量表>);
 ```
 * 格式输出，它是c语言中产生格式化输出的函数（在 stdio.h 中定义）。用于向终端（显示器、控制台等）输出字符。格式控制由要输出的文字和数据格式说明组成。要输出的的文字除了可以使用字母、数字、空格和一些数字符号以外，还可以使用一些[转义字符](http://baike.baidu.com/item/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6)表示特殊的含义。
@@ -17,10 +17,10 @@
   非格式字符串原样输出，在显示中起提示作用。输出表列中给出了各个输出项，要求格式字符串和各输出项在数量和类型上应该一一对应。
   
   
-### scanf函数
+## scanf函数
 * scanf()函数是格式输入函数，即按用户指定的格式从键盘上把数据输入到指定的变量之中。与printf()函数一样，都被声明在头文件stdio.h里.
 * scanf()函数调用的格式为：
-```md
+```c
     scanf("<格式控制字符串>"，地址列表);
     scanf("%d", &a);
 ```
@@ -38,40 +38,110 @@
     
     
 # 函数
-### int sprintf函数
+## int sprintf函数
 头文件：#include <stdio.h>
 
 sprintf()函数用于将格式化的数据写入字符串，其原型为：
+```c
     int sprintf(char *str, char * format [, argument, ...]);
+```
 
 【参数】str为要写入的字符串；format为格式化字符串，与printf()函数相同；argument为变量。
 
 除了前两个参数类型固定外，后面可以接任意多个参数。而它的精华，显然就在第二个参数--格式化字符串--上。 printf()和sprintf()都使用格式化字符串来指定串的格式，在格式串内部使用一些以“%”开头的格式说明符（format specifications）来占据一个位置，在后边的变参列表中提供相应的变量，最终函数就会用相应位置的变量来替代那个说明符，产生一个调用者想要的字符串。
 
 sprintf()最常见的应用之一莫过于把整数打印到字符串中，如：
+```c
     sprintf(s, "%d", 123);  //把整数123打印成一个字符串保存在s中
     sprintf(s, "%8x", 4567);  //小写16进制，宽度占8个位置，右对齐
+```
 
 sprintf的作用是将一个格式化的字符串输出到一个目的字符串中，而printf是将一个格式化的字符串输出到屏幕。sprintf的第一个参数应该是目的字符串，如果不指定这个参数，执行过程中出现 "该程序产生非法操作,即将被关闭...."的提示。
 
 sprintf()会根据参数format 字符串来转换并格式化数据，然后将结果复制到参数str 所指的字符串数组，直到出现字符串结束('\0')为止。关于参数format 字符串的格式请参考printf()
 
-### system函数
+## system函数
 在linux/unix里，就是**执行shell命令**
 
 
 
 表头文件
 
-```sh
+```c
 #include<stdlib.h>
 ```
 **定义函数**
 
 
-```sh
+```c
 int system(const char *command);
 ```
 比如：
-```sh
-system("")
+```c
+system("cp file newfile");  完成文件的拷贝
+```
+实现cp命令:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[]){
+    char a[10] = "cp ";
+    char b[10] = " ";
+    char cmd[100];
+    if(3 == argc)
+    {
+       strcpy(cmd, a);
+       strcat(cmd, argv[1]);
+       strcat(cmd, b);
+       strcat(cmd, argv[2]);
+       system(cmd);
+    }
+    else{
+       printf("Error!\n");
+    }
+    return 0;
+}
+```
+
+
+
+## fgets函数
+
+**功能**:  就是一次读取一行,遇到'\n'就立刻返回. 当返回值为NULL时表示文件读取结束
+
+fgets函数用来从文件中读入字符串。fgets函数的调用形式如下：fgets（str，n，fp）；此处，fp是文件指针；str是存放在字符串的起始地址；n是一个int类型变量。函数的功能是从fp所指文件中读入n-1个字符放入str为起始地址的空间内；如果在未读满n-1个字符之时，已读到一个换行符或一个EOF（文件结束标志），则结束本次读操作，读入的字符串中最后包含读到的换行符。因此，确切地说，调用fgets函数时，最多只能读入n-1个字符。读入结束后，系统将自动在最后加'\0'，并以str作为函数值返回。
+
+如果使用fgets()读取某个文件，第一次读取的bufsize为5，而文件的第一行有10个字符（算上'\n'），那么读取文件的指针会偏移至当前读取完的这个字符之后的位置。也就是第二次再用fgets()读取文件的时候，则会继续读取其后的字符。而，如果使用fgets() 读取文件的时候bufsize大于该行的字符总数加2（多出来的两个，一个保存文件本身的'\n'换行，一个保存字符串本身的结束标识'\0'），文件并不会继续读下去，仅仅只是这一行读取完，随后指向文件的指针会自动偏移至下一行。
+
+[[fgets百科]](http://baike.baidu.com/link?url=85CtmE5PgeAdVqto_dEHJT7Cr748mYEFBieKuREHF6WtYKYO2dBAiR26Un4Ew1EiERoTFoEF9Agn7X9DGTC2BK)
+
+**函数原型**
+
+```c
+char *fgets(char *s, int size, FILE *stream);
+```
+
+**参数**
+
+  * s :  用于存放读取的字符串(传递数组名即可)/字符型指针，指向用来存储所得数据的地址
+       
+  * size: 指定读取一次最多读取到的字节个数
+      
+  * stream: 文件结构体指针，将要读取的文件流(直接填写stdin即可) . 
+      
+      [[stdin标准输入]](http://baike.baidu.com/link?url=gP7CUsIqxkth8rJJYcOn-LhBbKI0uquvqau_FuCOnsC7dC6FnihU93xJBe_5ztJQCLgaXIG7OTIaWNUvbwRDeK)  
+      
+比如:
+```c
+fgets(buf, 64, stdin); 从标准输入读入一行 ,从键盘输入一行
+```
+
+**返回值**
+
+1. 成功，则返回第一个参数buf；
+1. 在读字符时遇到end-of-file，则eof指示器被设置，如果还没读入任何字符就遇到这种情况，则buf保持原来的内容，返回NULL；
+1. 如果发生读入错误，error指示器被设置，返回NULL，buf的值可能被改变
+      
