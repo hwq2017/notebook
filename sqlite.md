@@ -6,6 +6,13 @@
 $ sudo apt-get install sqlite3
 ```
 
+
+
+
+
+
+
+
     
     
 # SQLite数据类型
