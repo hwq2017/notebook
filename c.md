@@ -145,3 +145,9 @@ fgets(buf, 64, stdin); 从标准输入读入一行 ,从键盘输入一行
 1. 在读字符时遇到end-of-file，则eof指示器被设置，如果还没读入任何字符就遇到这种情况，则buf保持原来的内容，返回NULL；
 1. 如果发生读入错误，error指示器被设置，返回NULL，buf的值可能被改变
       
+
+
+
+# 指向指针的指针
+
+[指向指针的指针](https://wenku.baidu.com/view/11cc8625ccbff121dd36836e.html)
