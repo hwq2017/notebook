@@ -384,5 +384,25 @@ struct {
 函数可以有结构类型的实际参数和返回值
 
 1. 结构体类型变量可以作为函数的实参,  **注意**必须将结构体声明为全局变量，即在main函数之外声明
+```c
+#include <stdio.h>
 
+struct S{
+    char *name;
+    int age;
+};
+void print(struct S a);
+ int main(int argc, const char *argv[])
+ {
+    struct S stu={"ton", 14};
+   print(stu);
+   
+     return 0;
+ }
+void print(struct S a)
+{
+    printf("%s\n", a.name);
+    printf("%d\n", a.age);
+}
+```
   
