@@ -405,8 +405,7 @@ void print(struct S a)
     printf("%d\n", a.age);
 }
 ```
-
-
+2. 函数返回类型为结构体  **注意**，函数print的形式参数名和结构S的成员名相同是合法的，因为结构的名字拥有自己的空间。
 ```c
 #include <stdio.h>
 
