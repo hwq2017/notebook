@@ -405,4 +405,31 @@ void print(struct S a)
     printf("%d\n", a.age);
 }
 ```
+
+
+```c
+#include <stdio.h>
+
+struct S{
+    char *name;
+    int age;
+    float score;
+};
+struct S print(char *name, int age, float score);
+
+int main(int argc, const char *argv[])
+{
+   struct S stu;
+   stu = print("sam", 11, 78);
+   printf("%s  %d  %f\n", stu.name, stu.age, stu.score);
+    return 0;
+}
+struct S print(char *name, int age, float score)
+{
+    struct S a;
+    a.name = name;
+    a. age = age;
+    return a;
+}
+```
   
