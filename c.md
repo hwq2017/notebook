@@ -413,6 +413,7 @@ void print(struct S a)
 }
 ```
 2. 函数返回类型为结构体  **注意**，函数print的形式参数名和结构S的成员名相同是合法的，因为结构的名字拥有自己的空间。
+
 ```c
 #include <stdio.h>
 
@@ -486,17 +487,17 @@ struct A s;
 struct A *p;                                    
 p = &s;     // 将结构变量s的首地址赋值给指针变量 p  
 ```                                             
-
-2.  用指针访问结构体成员：  (*p).name
+2. 用指针访问结构体成员：  (*p).name
  
 3. 用指针直接访问结构体成员可以用 " -> " 符号
- 如：  p->name
+如：  p->name
  
- 以下三条语句均是等价的
+以下三条语句均是等价的
  ```c
  s.name="san";  (*p).name="san";  p->name="san";
  ```
-4. ```c
+4.
+```c
 typedef struct A{                                       
    int age;                                    
    char *name;                                 
@@ -505,7 +506,7 @@ typedef struct A{
  p q;  //定义指针变量 q ;
  q = &s;  
 ```
-### 嵌套的结构体
 
+### 嵌套的结构体
 即一种结构嵌套在另一种结构中使用
  
