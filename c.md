@@ -670,7 +670,67 @@ r =   3.00,l =  18.85,s =  28.27,v = 113.10
 
 ## 条件编译
 
+对一部分内容指定编译条件
+**条件编译命令有以下几种形式：**
 
+1. 
+```c
+#ifdef 标识符
+程序段 1
+#else
+程序段 2
+#endif
+```
+例如：
+```c
+#include <stdio.h>
+
+#define LETTER1
+
+int main(int argc, const char *argv[])
+{
+    char str[20] = "CLanguage", c;
+    int i = 0;
+    while((c = str[i]) != '\0')
+    {
+#ifdef LETTER1
+        if(c >= 'a' && c <= 'z')
+            c = c - 32;
+#else
+        if(c >= 'A' && c <= 'Z')
+            c = c + 32;
+#endif
+        printf("%c", c);
+        i++;
+    }
+    printf("\n");
+    return 0;
+}
+```
+
+它的作用是当所指定的标识符已经被 #define 命令定义过，则在程序编译阶段只编译程序段1，否则编译程序段2。其中 #else 部分可以省略。
+
+2. 
+```c
+#ifndef 标识符
+程序段 1
+#else
+程序段 2
+#endif
+```
+
+它的作用是当所指定的标识符未被定义过，则在程序编译阶段只编译程序段1，否则编译程序段2。
+
+3.
+```c
+#ifndef 表达式
+程序段 1
+#else
+程序段 2
+#endif
+```
+
+当表达式的值为真时就编译程序段1，否则编译程序段2。
 
 
 
