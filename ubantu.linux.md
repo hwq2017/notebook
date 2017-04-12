@@ -121,7 +121,7 @@ mv [参数] [源文件] [目的位置+文件名]
 5. ### rm
 删除文件
 
-## 文件的归档和压缩
+
 
 1. 对文件进行压缩和解压 
 
@@ -174,8 +174,12 @@ deb, 表示deb软件包的后缀名
 
 2. 在线管理操作命令
 
-* 在软件包安装前，先要更新一下本地软件源  apt-get update 目的是
+* 在软件包安装前，先要更新一下本地软件源  apt-get update 
 * 软件包安装 apt-get install sl
 * 软件包的卸载 apt-get remove sl
 * 彻底卸载 apt-get remove --purge sl
 
+关于update 和 upgrade
+目的是update是下载源里面的metadata的. 包括这个源有什么包, 每个包什么版本之类的.## 文件的归档和压缩安装软件之前, 可以不upgrade, 但是要update. 因  为旧的信息指向了旧版本的包, 但是源的服务器更新了之后旧的包可能被新的替代了, 于是你会遇到404...
+
+[update](https://www.zhihu.com/question/21732981)
