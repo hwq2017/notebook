@@ -121,5 +121,61 @@ mv [参数] [源文件] [目的位置+文件名]
 5. ### rm
 删除文件
 
+## 文件的归档和压缩
 
+1. 对文件进行压缩和解压 
+
+```c
+gzip filename      //压缩
+gunzip filename    //解压
+```
+或
+
+```c
+bzip2 filename
+bunzip2 filename
+```
+2. 对文件和目录压缩和解压
+
+```c
+tar czvf file.tar.gz(压缩包的名字)  dir(要压缩的目录名)   // czvf 中c-->create, z-->压缩包类型gzip  可以使用man tar命令查看具体用法,v可以省                      略  
+tar cjvf file.tar.bz2 dir   
+tar cJvf file.tar.xz dir
+tar xvf file.bar.gz(xz)  // 解压，以上三种类型都可解压
+```
+
+
+## Linux下常见的两种软件包管理机制
+
+* RPM  (红旗版本下)
+* Deb (Ubantu版本下)  常用命令dpkg, apt。
+
+### 关于Deb软件包机制的讲解
+
+#### Deb软件包名称的组成
+
+**比如: sl_3.03-17_amd64.deb**
+```c
+sl, 表示软件包名称
+3.03-17, 表示版本号和修订版本号
+amd64, 表示运行机器的平台架构
+deb, 表示deb软件包的后缀名
+```
+
+
+
+1. 本地安装包管理
+* 软件包安装 dpkg -i sl_3.03-17_amd64.deb
+* 软件包卸载  dpkg -r sl
+* 软件包彻底卸载，移除所有配置文件 dpkg -P sl
+* 查看软件包的安装状态 dpkg -s sl
+* 查看软件包的安装路径 dpkg -L sl
+* 列出所有安装的软件包 dpkg -get-selections
+
+2. 在线管理操作命令
+
+* 在软件包安装前，先要更新一下本地软件源  apt-get update 目的是
+* 软件包安装 apt-get install sl
+* 软件包的卸载 apt-get remove sl
+* 彻底卸载 apt-get remove --purge sl
 
