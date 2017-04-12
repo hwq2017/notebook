@@ -183,3 +183,36 @@ deb, 表示deb软件包的后缀名
 目的是update是下载源里面的metadata的. 包括这个源有什么包, 每个包什么版本之类的.## 文件的归档和压缩安装软件之前, 可以不upgrade, 但是要update. 因  为旧的信息指向了旧版本的包, 但是源的服务器更新了之后旧的包可能被新的替代了, 于是你会遇到404...
 
 [update](https://www.zhihu.com/question/21732981)
+
+
+
+
+## openssh 
+
+openssh是ssh协议的免费开源实现。SSH协议族可以用来远程控制，或在计算机之间传送文件。
+
+安装openssh-server和openssh-client
+
+安装完后
+
+通过 
+```c
+ssh 用户名@ip地址
+```
+
+远程控制计算机
+
+通过
+
+```c
+scp 用户名@ip地址:某个目录下的文件名/目录名     // 目录名要在scp后加-r
+```
+
+来拷贝远程系统的文件或目录
+
+给远程系统传文件是以下命令
+
+```c
+scp filename(要传的文件) 用户名@ip地址:/dir/filename1 (重命名为filename1)
+```
+
