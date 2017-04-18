@@ -783,3 +783,585 @@ background: red url("image/xxx.png) repeat 10px 10px fixed;
 </body>
 </html>
 ```
+##  CSS 盒子模型
+ 
+ **html中的任何一个元素都可以看作一个盒子，每个盒子都由内边距(padding)  外边距(margin) 边框(border) 和元素的内容 组成。**
+ 
+ #### 边框属性
+ 
+ 边框属性的属性值有：
+ 1. 宽 
+ 2. 颜色  transparent为透明的
+ 3. 样式,常用样式有solid , dotted, dashed, double
+ 
+ 边框属性可单独设置，可综合设置,不管如何设置，样式是必不可少的,否则其他设置效果无效
+ 
+ 
+ 
+ 示例代码：
+ ```html
+ <head>
+  <meta charset="UTF-8">
+  <title>box盒子模型</title>
+  <style media="screen">
+    .f1{
+      width: 300px;
+      height: 200px;
+      background-color: yellow;
+      /*设置边框属性的三种方法*/
+
+
+      /*方法一  border边框的综合设置  宽度 样式 颜色   样式是必不可少的*/
+      /*border: 5px dotted red;
+      border-color:red blue pink green;*/
+
+
+      /*方法二   单独设置边框时，样式也必不可少*/
+      border-top-width: 10px;
+      border-top-style: solid;
+      border-top-color: red;
+
+      /*方法三  border另一种综合设置*/
+      border-top:5px dotted black;
+
+    }
+  </style>
+</head>
+ ```
+ **小技巧：** 设置边框为0的方法
+ ```html
+ border:0 none;
+ ```
+ 
+ 
+ #### 内边距padding属性
+ 
+padding可单独设置也可综合设置,**注意**综合设置时，一定要遵从上，(右，下，左)的顺序
+ 
+**注意** 修改padding时会改变盒子的大小
+ 
+示例代码：
+ 
+```html
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  *{
+    margin: 0px;
+    padding: 0px;
+  }
+  .one{
+    /*height width只是设置了内容的宽高*/
+    
+    height:100px;
+    width:500px;
+    
+    
+    /*修改padding(内边距)会影响盒子的大小,但盒子里内容不会占用padding*/
+
+    /*padding-top:50px;
+    padding-bottom:50px;
+    padding-left:50px;
+    padding-right:50px;*/
+    
+    /*上下左右都是50px*/
+    /*padding:50px;*/
+
+    /*对称关系，padding综合设置的顺序为上右下左*/
+    padding:50px 40px;
+    /*padding:50px 40px 30px;*/
+    /*padding:50px 40px 30px;*/
+
+
+        /*盒子阴影*/
+    box-shadow:10px  10px  5px #abcdef;
+    background: red;
+  }
+  </style>
+</head>
+
+```
+  
+ #### 外边距margin
+ 
+ 用法同padding
+ 
+ **margin: 10px auto; 实现盒子水平居中**,**auto**只能实现水平居中
+ 
+ **注意**
+1.外边距可以使用负值，使相邻元素重叠。
+2.可能会出现外边距合并情况
+3.为了方便操作,可以用 * { margin:0; padding: 0}取消浏览器的默认属性
+ 
+ **外边距合并问题**
+ 1. 两个同级元素外边距合并，**只能上下合并，且以最大值为准** 左右是叠加
+ 2. 嵌套元素外边距的合并，对于两个嵌套关系的块元素，如果父元素没有上内边距及边框，则父元素的上外边距会与子
+ 元素的上外边距发生合并，合并后的外边距为两者  中的较大者，即使父元素的上外边距为0，也会发生合并
+ 如果希望外边距不合并，可以为父元素定义1像素的上边框或上内边距
+ 
+ 
+ 示例代码：
+ ```html
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  * {
+    margin:0px;
+    padding:0px;
+  }
+  .f1,.f2{
+    width:500px;
+    height:100px;
+    border:5px solid red;
+  }
+  /*上下外边距合并问题，取最大的值，作为上下间距*/
+  .f1{
+    margin-bottom:10px;
+  }
+  .f2{
+    margin-top:50px;
+    /*将左右边距设置为auto(只在左右方向有用)，可以实现在父元素内的水平居中*/
+    /*margin: 10px auto;*/
+  }
+  .f3{
+    width:500px;
+    height: 300px;
+    background-color: red;
+    margin-top: 10px;
+
+    /*解决嵌套外边距合并问题，2种方法  子元素f4里margin属性必须有*/
+
+    /*方法一*/
+    /*padding-top: 1px;*/
+    /*方法二*/
+    border-top: 5px solid yellow;
+  }
+  .f4{
+    width: 200px;
+    height: 100px;
+    margin: 50px auto;
+    background-color: green;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="f1">来看待赛冠军落实党风建设力度咖啡</div>
+  <div class="f2">打开了改进了开设的废旧塑料打法</div>
+  <div class="f3">
+    <div class="f4">
+
+    </div>
+  </div>
+</body>
+ ```
+#### 盒子模型的其他属性
+
+1. box-shadow 为盒子添加阴影
+2. border-radius 圆角边框
+3. border-image 用图片来创建边框
+ 
+## CSS定位
+### 浮动
+
+
+元素的浮动是指设置了浮动属性的元素会脱离标准文档流的控制，移动到其父元素中指定位置的过程。比喻：游泳池的池底以及水面游泳池的池底相当于标准流
+（文档流），水面相当于浮动的元素所有“层”。水面的元素会遮挡水中的元素)。
+
+**格式**
+
+```html
+选择器 {
+float: 属性值；
+}
+```
+
+float的属性值可以为left, right, none.
+
+
+示例代码：
+
+```html
+<head>
+  <meta charset="UTF-8">
+  <title>float浮动</title>
+  <style media="screen">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .nav{
+      /*去掉项目符号*/
+
+      list-style: none;
+      /*
+      ul 的所有子元素都浮动了，但是ul又没有设置高度，那么ul的高度就变为0
+      会导致后边的标准流元素也跟着移动，会对页面布局产生影响        */
+    }
+    .nav li{
+      background-color: pink;
+      float: left;
+      margin: 10px;
+
+    }
+
+  </style>
+</head>
+```
+```html
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style media="screen">
+    .f1{
+      width: 300px;
+      height: 200px;
+      background-color: red;
+      float: left;
+    }
+    .f2{
+      width: 500px;
+      height: 200px;
+      background-color: blue;
+/* 设置浮动时，需要注意它前一个元素是否有浮动，上一个元素无浮动的话，则此元素不浮动，
+上设置浮动，此元素不设置浮动，此会被覆盖  ，上设置浮动，此有浮动，会在一行显示*/
+/*元素变为行内块元素，具有行和块的特点*/
+      float: left;
+    }
+  </style>
+</head>
+```
+
+### 消除浮动
+
+**浮动的影响**
+
+**消除浮动的方法**
+
+1. 给父元素设置一个高度
+2. 在发生浮动的父元素最后添加一个空元素，给空元素设置clear属性，属性值有left，right，both
+3. 直接给父元素设置overflow属性  。 overflow:hidden;
+4. 最方便快捷的方法，使用伪元素
+
+
+示例代码：
+
+```html
+<head>
+  <meta charset="UTF-8">
+  <title>消除浮动的影响</title>
+  <style media="screen">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    
+    /*伪元素*/
+    .clearfix::after, .clearfix::before {
+      content: ""; /*内容必须设置*/
+      height: 0;
+      display: block;
+      visibility: hidden;
+      line-height: 0;
+      clear: both;
+    }
+     /*第四种消除浮动的方法  使用伪元素*/
+    .clearfix {
+      zoom: 1;
+     }
+     
+     
+     
+    .nav{
+      list-style: none;
+
+      /*第一种消除浮动的方法*/
+      /*height: 50px;*/
+      /*第二种消除浮动的方法*/
+      /*overflow: hidden;*/
+
+    }
+    .nav li{
+      background: red;
+      width: 100px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;   /*line-height = height 使字体垂直居中*/
+      margin-right:10px;
+
+      float: left;
+    }
+
+    /*第三种消除浮动的方法*/
+    /*.nav div{
+      clear: both;
+    }*/
+  </style>
+</head>
+```
+## 定位position
+
+常用属性值
+1. static,默认值    **没有脱离标准流**
+2. relative 相对定位  **没有脱离标准流**
+3. absolute 绝对定位 **脱离了标准流**
+4. fixed 固定，以浏览器可视窗口进行定位，不会随着滚动条移动 **脱离了标准流**
+
+其中，absolute有三种情况：
+
+1)如果盒子没有body之外其他的祖先元素，那么在绝对定位的时候这个位置是相对于body的。
+2)_如果盒子有祖先元素，但是祖先元素并没有设置定位，那么在绝对定位的时候这个位置还是相对于body的。
+3)如果盒子有祖先元素并且祖先元素有定位(absolute,relative都可以)，那么这个时候我们的盒子定位是相对于最近一个设置过定位的祖先元素的。
+
+示例代码：
+```html
+  <style media="screen">
+    .f1{
+      width: 300px;
+      height: 200px;
+      background-color: red;
+      /*相对于自己的位置发生偏移 */
+      /*相对定位*/
+      position: relative;
+
+      top: 30px;  /*距离原先的顶部距离为30px*/
+      left:30px;  /*距离原先距离的左距离为30px*/
+    }
+
+
+    /**/
+    .f2{
+      width: 500px;
+      height: 300px;
+      background-color: green;
+
+
+      /*绝对定位
+      该元素脱离了标准流
+      f2 的父元素为body ，那么它的绝对定位都是相对于body的*/
+      position: absolute;
+      top: 100px;
+      left: 200px;
+    }
+    .f3{
+      width: 400px;
+      height: 200px;
+      background-color: blue;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+
+    }
+    .s{
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+
+      /*
+      1. 对s设置了absolute，但是s的祖元素都没有设置position
+      那么，s绝对定位是相对于body
+
+      2. 对s设置了absolute，同时s 的某一个祖先元素设置过position
+      那么，s 的绝对定位都是相对于最近设置过定位的祖先
+      */
+      position: absolute;
+      top: 10px;
+      left: 10px;
+
+    }
+  </style>
+```
+
+### 其它属性
+
+
+1. overflow
+overflow值 | 含义
+hidden   | 超出隐藏部分
+scroll  |超出部分显示滚动条
+auto  | 超出部分显示滚动条，否则不显示
+ 
+2. 伪元素
+伪元素里必须要有content属性
+示例代码：
+
+
+```html
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style media="screen">
+
+  
+    .f::before{
+      content: "显示在span前面";
+    }
+    .f::after{
+      content: "显示在span后面";
+    }
+  </style>
+</head>
+<body>
+  <div class="f1">
+    <span>闪客帝国几十块登录</span>
+  </div>
+</body>
+```
+3. display
+属性值：
+
+* block 显示为块元素，
+
+* inline 显示为行元素
+
+* inline-block 显示为行内块元素
+
+示例代码：
+
+```html
+<style media="screen">
+
+    /*display属性可以让块元素和行元素互相转换*/
+    /*将俩个元素设置为行内块元素时，会底部在统一水平线水平对齐*/
+    .f{
+      width: 100px;
+      height: 100px;
+      background: blue;
+
+      /*将块元素转化为行元素，如果块元素里没有内容，此时转化成的行元素就为空，会被后面的元素覆盖*/
+      /*display: inline;  */
+
+      display: inline-block;
+    }
+    .s{
+      width: 100px;
+      height: 200px;
+      background: red;
+      display: inline-block;
+    }
+    .c {
+      width: 300px;
+      height: 100px;
+      background: pink;
+      display: block;
+    }
+
+  </style>
+```
+
+4. visibility可视
+属性值:
+* hidden 隐藏一个元素，占据页面空间
+
+* visible 页面是可视的
+
+示例代码：
+
+```html
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style media="screen">
+  .f{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    /* 隐藏一个元素，占据页面空间 */
+    /*visibility: hidden;*/
+
+    /*隐藏一个元素，不占据页面空间*/
+    display: none;
+  }
+  .s{
+    width: 100px;
+    height: 200px;
+    background: red;
+    display: inline-block;
+  }
+  </style>
+</head>
+
+```
+
+5. z-index用于设置元素的层级
+默认情况下，设置**定位**的元素层级比普通元素要高，是大于0，但是小于1
+
+示例代码:
+
+```html
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style media="screen">
+  .f1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /*用于设置元素的层级，可以是任意整数*/
+                /*默认情况下，设置定位的元素的层级都比普通元素的层级要高，是大于0，但是小于1*/
+    			/*z-index: -1;*/
+  }
+
+
+  .f2{
+    width: 300px;
+    height: 200px;
+    background: red;
+
+    /*
+			z-index的设置只对设置过定位的元素有效
+			*/
+
+    z-index: 1;
+    position: relative;
+  }
+  .l{
+    width: 300px;
+    height: 100px;
+
+    list-style: none;
+  }
+
+  /*
+		浮动排列在一行的所有元素，默认情况下，元素的层级从左到右逐渐增大，
+		从0开始无限接近于1
+		*/
+
+  .l li{
+    width: 50px;
+    height: 50px;
+
+    margin-right: -1px;/*将相邻两个盒子边框显示为一条，*/
+    border: 1px solid red;
+    float: left;
+  }
+  .l li:hover{
+    border-color: yellow;
+
+    /*通过设置z-index,但同时必须设置position .当点击盒子边框时，盒子所有边框都变色*/
+    z-index: 2;
+    position: relative;
+  }
+  </style>
+</head>
+<body>
+  <div class="f1"></div>
+  <div class="f2"></div>
+  <ul class="l">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</body>
+
+```
+
+
+ 
