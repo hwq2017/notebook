@@ -1111,9 +1111,11 @@ float的属性值可以为left, right, none.
 
 其中，absolute有三种情况：
 
-1)如果盒子没有body之外其他的祖先元素，那么在绝对定位的时候这个位置是相对于body的。
-2)_如果盒子有祖先元素，但是祖先元素并没有设置定位，那么在绝对定位的时候这个位置还是相对于body的。
-3)如果盒子有祖先元素并且祖先元素有定位(absolute,relative都可以)，那么这个时候我们的盒子定位是相对于最近一个设置过定位的祖先元素的。
+1. 如果盒子没有body之外其他的祖先元素，那么在绝对定位的时候这个位置是相对于body的。
+
+2. 如果盒子有祖先元素，但是祖先元素并没有设置定位，那么在绝对定位的时候这个位置还是相对于body的。
+
+3. 如果盒子有祖先元素并且祖先元素有定位(absolute,relative都可以)，那么这个时候我们的盒子定位是相对于最近一个设置过定位的祖先元素的。
 
 示例代码：
 ```html
@@ -1174,11 +1176,116 @@ float的属性值可以为left, right, none.
   </style>
 ```
 
+### 子盒子在父盒子中居中的方法
+1. 子盒子中用 magin:0px auto; // 调节0px使其上下居中，**前提**是父盒子中必须设置 **border**或**padding**属性
+
+示例代码：
+```html
+<style media="screen">
+    .f {
+      width: 300px;
+      height: 200px;
+      background: yellow;
+      /*border: 1px solid white;*/
+      padding: 1px;
+    }
+    .s {
+      width: 200px;
+      height: 100px;
+      background: pink;
+      margin: 47px auto;
+    }
+  </style>
+```
+
+2. 给父盒子直接设置padding属性，为让子盒子居中，设置padding后，父的宽高做相应变化
+
+示例代码：
+```html
+<style media="screen">
+    .f {
+      width: 200px; /*原宽300*/
+      height: 100px;/*原高200*/
+      background: yellow;
+
+      padding: 100px;
+    }
+    .s {
+      width: 200px;
+      height: 100px;
+      background: pink;
+
+    }
+  </style>
+```
+
+3. 给父盒子和子盒子设置**position**属性
+* 子盒子绝对定位，通过调节子盒子里top和left的px值
+
+* 在不知道父盒子大小的情况下进行定位
+
+
+示例代码：
+
+```html
+<style media="screen">
+  /*在不改变父元素大小的情况下，让子元素居中*/
+    .f{
+      width: 500px;
+      height: 300px;
+      background: yellow;
+      margin: 50px auto;
+
+     /*第一种 居中方法 */
+      /*为让子盒子居中，设置padding后，父的宽高做相应变化400,200，保证父最后宽高不改变*/
+      /*padding-left: 100px;
+      padding-top: 100px;*/
+
+
+      position: relative;
+    }
+    .s{
+      width: 300px;
+      height: 100px;
+      background: red;
+
+     /*第二种方法*/
+     /*分别在父子元素设置定位属性，通过调节子元素里的px值 */
+      position: absolute;
+      /*top: 93px;
+      left: 99px;*/
+
+      /*第三种方法*/
+      top: 50%;  /* 50% 是相对于父元素*/
+      margin-top: -50px; /*向上移动元素本身高度的一半*/
+      left: 50%;
+      margin-left: -150px;
+
+    }
+     .d {
+       width: 500px;
+       height: 300px;
+       background: yellow;
+       padding-top: 1px;
+     }
+
+  .d  .v{
+      width: 300px;
+      height: 100px;
+      background: red;
+      /*margin: 00px auto;*/
+      margin-top: 100px;
+    }
+  </style>
+```
+
 ### 其它属性
 
 
 1. overflow
+
 overflow值 | 含义
+----------|------|
 hidden   | 超出隐藏部分
 scroll  |超出部分显示滚动条
 auto  | 超出部分显示滚动条，否则不显示
