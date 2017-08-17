@@ -162,7 +162,7 @@ __doc__ (文档字符串), __class__ , __dict__ (类与对象的所有成员,类
 ```
 **魔法方法:** 
 ```sh
-__getattr__ , __setattr__ ,__init__, __new__ , __call__(模拟函数行为)
+__getattr__ , __setattr__ ,__init__, __new__ , __call__(模拟函数行为) , __mro__(方法解析顺序)
 ```
 
 ```sh
