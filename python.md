@@ -258,13 +258,137 @@ print globals()
 
 **isinstance(obj,class or type or tuple)**:判断是否有继承关系
 
+### python异常处理
+
+1. try…except…
+只看try和except的部分，如果没有出现异常则except后的语句在执行try语句后被忽略，如果try子句中发生异常，该部分的其他语句被忽略，直接跳到except部分，执行其后面指定的异常类型及其子句。except后面也可以没有任何异常类型，即无异常参数。这样无论try后面的语句发生什么异常都会执行except。except后如果同时扑捉多个异常则中间用逗号隔开。
+
+
+2. 处理多个异常
+所谓处理多个异常指的是捕获到不同的异常时可以用不同的语句模块进行处理。
+
+
+3. finally和else语句
+else语句是当执行了try语句后会执行else语句，每当程序出现异常，也就是执行了except语句那么else语句就不会执行了。
+finally语句必须放在整个try…except..else..finally语句的最后。无论是否发生异常最后都会执行finally后面的语句块
+
+4. raise用于显式地出发异常，其一般形式很简单，raise后面跟着一个类或者类的实例就可以了。如果你要自己创建一个类，那么这个类需要继承于Exception类。
+```sh
+class MyError(Exception):
+    pass
+
+try:
+    s = None
+    if s is None:
+        print ("s 是空对象")
+        #如果引发MyError异常，后面的代码将不能执行
+        raise MyError("附加异常信息") 
+    print (len(s))
+except MyError as X:
+    print ("空对象没有长度")
+    print(X.args)
+```
+
+#### with ... as...
+
+with expresion as variable的执行过程是，首先执行__enter__函数，它的返回值会赋给as后面的variable，想让它返回什么就返回什么，只要你知道怎么处理就可以了，如果不写as variable，返回值会被忽略。然后，开始执行with-block中的语句，不论成功失败(比如发生异常、错误，设置sys.exit())，在with-block执行完成后，会执行__exit__(type,value,traceback)函数。如果with代码块发生异常则__exit__中的参数会被置为相应的异常信息。如果__exit__函数返回值为假，则异常会重新引发，否则，异常会终止。如果with代码块没有发生异常则__exit__中的参数为None。
+
+用这中方法可以用来简化try/finally代码，看起来可以比try/finally更清晰。这样的过程其实等价于：
+```sh
+    try:  
+          执行 __enter__的内容  
+          执行 with_block.  
+    finally:  
+          执行 __exit__内容  
+```
+
+### 模块,包
+
+m1.py >> 顶层模块
+```sh
+#coding=utf-8
+
+# 在非顶层模块(完成相应功能)中,一般不允许除函数,类之外的顶层代码出现,否则在导入该模块时就会执行该顶层代码
+# 顶层模块(调用)
+
+# 可以在一个import下同时导入多个模块,用 , 隔开, 允许多个模块下变量名相同
+# import m2,m3
+
+# 如果模块名太长,可以起别名
+# import m2 as M
+
+# 重复导入同一模块时,代码只执行一次,可以用内建函数 reload(模块名) 使重复执行,一般针对第三方模块
+# import m2
+# reload(m2)
+
+import m2
+import m3
+
+# from import 用来将模块的部分属性导入到当前的命名空间,如果原来有重名的变量将会被覆盖
+# * 将全部导入到当前命名空间
+from m3 import *
+# 导入模块中受保护成员,不能用 *,如下:
+from m3 import _fun
+
+m = m2.Demo('hello')
+print m.getName()
+print m2.fun(10,20)
+
+m3.func()
+m3._fun()
 
 
 
+# 包的导入路径内每个目录必须有__init__.py文件,可以写入代码,也可以不写.这样就可以在__init__.py中导入我们所需要的模块
+
+from package import ctime,fun # *
+
+print ctime()
+fun()
+
+# 包的导入两种方式:
+
+from package.p import fun
+import package.package1.p1
+# import package.p
+
+fun()
+package.package1.p1.fun()
+# package.p.fun()
+
+```
+m2.py
+```sh
+#coding=utf-8
+
+class Demo(object):
+    def __init__(self,name):
+        self.name = name
+    def getName(self):
+        return self.name
 
 
+def fun(a,b):
+    return a + b
 
+# 在本模块中 __name__ == '__main__',导入到顶层模块中,__name__是导入的模块名
+print '=====',__name__
 
+if __name__ == '__main__':
+    print '顶层代码,可以做代码测试'
+```
+m3.py
+```sh
+#coding=utf-8
+def func():
+    print 'hello m3'
+
+def _fun():
+    print '我是模块中受保护的成员'    
+
+print 'm3m3m3m3' # 顶层代码
+
+```
 
 
 
